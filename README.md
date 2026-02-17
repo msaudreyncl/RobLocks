@@ -13,6 +13,7 @@
 **RobLocks** is a microcontroller-based secure rental locker system designed to provide automated, timed access control. The system leverages RFID for security, GSM for remote notifications, and I²C for modular scalability between multiple locker units.
 
 
+
 ---
 
 ## ⚙️ Key Features
@@ -33,19 +34,6 @@ Before deploying the system, each RFID card (Admin, User, etc.) must be identifi
 3.  **Visual Confirmation** of the code on the I2C LCD screen.
 
 **How to use:** Flash this code to an Arduino connected to the RFID reader. Open the Serial Monitor at **9600 Baud**. When a card is tapped, the UID will be printed, which can then be hardcoded into the Master or Slave logic.
-
----
-
-## 📂 Project Structure
-```text
-ROBLOCKS/
-├── MasterArduino/
-│   └── master_code.ino
-├── SlaveArduino/
-│   └── slave_code.ino
-├── Utilities/
-│   └── GettingUIDcardCodesCommentedCode.ino
-└── README.md
 
 ---
 
@@ -91,11 +79,39 @@ Before uploading the code to your Arduino boards, you **must** update the follow
 In `master_code.ino`, locate the phone number variables and replace them with the actual mobile numbers that should receive the SMS alerts:
 ```cpp
 const char* numberLocker1 = "insert phone number 1"; // Format: "+639XXXXXXXXX"
-const char* numberLocker2 = "insert phone number 2"; //
+const char* numberLocker2 = "insert phone number 2";
+```
 
 ### 2. RFID UIDs (Master & Slave Code)
-Use the utility script `GettingUIDcardCodesCommentedCode.ino` to find your cards' UIDs. Then, update these lines in both `master_code.ino` and `slave_code.ino`:
+Use the utility script GettingUIDcardCodesCommentedCode.ino to find your card's UID. Then, update these lines in both master_code.ino and slave_code.ino:
+
+In Master Code:
 ```cpp
 const String ADMIN_UID_MASTER = "insert admin rfid uid"; // e.g., "A1 B2 C3 D4"
-const String USER_UID_MASTER  = "insert user rfid uid";  //
+const String USER_UID_MASTER  = "insert user rfid uid"; 
+```
 
+In Slave Code:
+```cpp
+const String ADMIN_UID_SLAVE = "insert admin rfid uid"; 
+const String USER_UID_SLAVE  = "insert user rfid uid";  
+```
+
+### 3. I2C Addresses
+The Master and Slave lockers may use different I2C addresses for their LCD screens. Check your specific modules and update the following if necessary:
+Master LCD: LiquidCrystal_I2C lcd(0x26, 16, 2);
+Slave LCD: LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+---
+
+## 📂 Project Structure
+Plaintext
+
+ROBLOCKS/
+├── MasterArduino/
+│   └── master_code.ino
+├── SlaveArduino/
+│   └── slave_code.ino
+├── Utilities/
+│   └── GettingUIDcardCodesCommentedCode.ino
+└── README.md
