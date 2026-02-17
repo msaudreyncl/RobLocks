@@ -99,8 +99,10 @@ const String USER_UID_SLAVE  = "insert user rfid uid";
 
 ### 3. I2C Addresses
 The Master and Slave lockers may use different I2C addresses for their LCD screens. Check your specific modules and update the following if necessary:
+```cpp
 Master LCD: LiquidCrystal_I2C lcd(0x26, 16, 2);
 Slave LCD: LiquidCrystal_I2C lcd(0x27, 16, 2);
+```
 
 ---
 
