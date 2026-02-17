@@ -46,3 +46,54 @@ ROBLOCKS/
 ├── Utilities/
 │   └── GettingUIDcardCodesCommentedCode.ino
 └── README.md
+
+## 🧩 Hardware Components & Pinout
+
+### RFID (RC522 → Arduino)
+| RC522 | Arduino | Purpose |
+| :--- | :--- | :--- |
+| SDA | D10 | SPI Slave Select |
+| SCK | D13 | SPI Clock |
+| MOSI | D11 | SPI Master Out Slave In |
+| MISO | D12 | SPI Master In Slave Out |
+| RST | D9 | Reset Pin |
+| 3.3V | 3.3V | Power (**Do NOT use 5V**) |
+| GND | GND | Ground |
+
+
+
+### LCD (I²C → Arduino)
+| LCD | Arduino | Purpose |
+| :--- | :--- | :--- |
+| SDA | A4 | Data Line |
+| SCL | A5 | Clock Line |
+| VCC | 5V | Power |
+| GND | GND | Ground |
+
+---
+
+## 📚 Libraries Used
+* `SPI.h`: SPI communication for the RFID module.
+* `MFRC522.h`: RFID card detection and UID reading.
+* `Wire.h`: I²C communication between Master and Slave.
+* `LiquidCrystal_I2C.h`: LCD display control.
+* `SoftwareSerial.h`: GSM module communication (Master only).
+
+---
+
+## ⚠️ Required Code Configurations
+
+Before uploading the code to your Arduino boards, you **must** update the following placeholders in the source files to match your specific hardware:
+
+### 1. Phone Numbers (Master Code)
+In `master_code.ino`, locate the phone number variables and replace them with the actual mobile numbers that should receive the SMS alerts:
+```cpp
+const char* numberLocker1 = "insert phone number 1"; // Format: "+639XXXXXXXXX"
+const char* numberLocker2 = "insert phone number 2"; //
+
+### 2. RFID UIDs (Master & Slave Code)
+Use the utility script `GettingUIDcardCodesCommentedCode.ino` to find your cards' UIDs. Then, update these lines in both `master_code.ino` and `slave_code.ino`:
+```cpp
+const String ADMIN_UID_MASTER = "insert admin rfid uid"; // e.g., "A1 B2 C3 D4"
+const String USER_UID_MASTER  = "insert user rfid uid";  //
+
