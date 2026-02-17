@@ -47,6 +47,8 @@ ROBLOCKS/
 │   └── GettingUIDcardCodesCommentedCode.ino
 └── README.md
 
+---
+
 ## 🧩 Hardware Components & Pinout
 
 ### RFID (RC522 → Arduino)
