@@ -12,8 +12,6 @@
 ## 📌 Project Overview
 **RobLocks** is a microcontroller-based secure rental locker system designed to provide automated, timed access control. The system leverages RFID for security, GSM for remote notifications, and I²C for modular scalability between multiple locker units.
 
-
-
 ---
 
 ## ⚙️ Key Features
